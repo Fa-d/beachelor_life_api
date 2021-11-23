@@ -1,5 +1,5 @@
-const sql = require("./db.js");
-const responsBodyFormatter = require("../../utilities.js")
+const sql = require("../../config/db.js");
+const responsBodyFormatter = require("../../../utilities.js")
 
 
 class LogInRegister {

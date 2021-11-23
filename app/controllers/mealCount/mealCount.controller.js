@@ -1,4 +1,4 @@
-const MealCount = require("../models/mealCount.model.js");
+const MealCount = require("../../models/mealCount/mealCount.model.js");
 
 exports.mealCountAll = (req, res) => {
     if (!req.body) {

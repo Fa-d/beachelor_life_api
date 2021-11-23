@@ -1,4 +1,4 @@
-const LogInRegister = require("../models/login.model.js");
+const LogInRegister = require("../../models/login_signup/login.model.js");
 
 
 exports.loginCheck = (req, res) => {

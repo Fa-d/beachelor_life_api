@@ -1,5 +1,5 @@
-const sql = require("./db.js");
-const responsBodyFormatter = require("../../utilities.js")
+const sql = require("../../config/db.js");
+const responsBodyFormatter = require("../../../utilities.js")
 
 
 
@@ -17,7 +17,7 @@ class MealCount {
     }
 
     static UpdateMealCountFunc(mealCountModel, result) {
-        sql.query(`update master_meal SET meal_count = "${mealCountModel.meal_count}" where fk_uid = "${mealCountModel.user_id}";`, (err, res) => {
+        sql.query(`update master_meal SET mealCount = "${mealCountModel.meal_count}" where fkUid = "${mealCountModel.user_id}";`, (err, res) => {
             if (err) {
                 result(err, null);
                 return;
