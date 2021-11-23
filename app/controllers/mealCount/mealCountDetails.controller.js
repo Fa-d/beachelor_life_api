@@ -30,6 +30,20 @@ exports.GETUserWiseMealCount = (req, res)=>{
             model: []
         });
     }
+    const UserModel = {
+        userID: req.body.userId,
+    }
+    
+    MealCountDetailsModel.getUserWiseMealCount(UserModel, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Failed",
+                didError: true,
+                errorMessage: "Some internal error occured",
+                model: []
+            })
+        } else res.send(data);
+    });
 };
 exports.UPDATEUserWiseMealCount = (req, res)=>{
     if (!req.body) {
@@ -40,6 +54,24 @@ exports.UPDATEUserWiseMealCount = (req, res)=>{
             model: []
         });
     }
+
+    const UserModel = {
+        isDinner: req.body.isDinner,
+        count: req.body.count,
+        userID: req.body.userId,
+        date: req.body.date
+    }
+    
+    MealCountDetailsModel.updateUserWiseMealCount(UserModel, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Failed",
+                didError: true,
+                errorMessage: "Some internal error occured",
+                model: []
+            })
+        } else res.send(data);
+    });
 };
 exports.INSERTUserWiseMealCount = (req, res)=>{
     if (!req.body) {
