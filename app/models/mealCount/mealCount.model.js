@@ -1,5 +1,5 @@
 const sql = require("../../config/db.js");
-const responsBodyFormatter = require("../../../utilities.js")
+const responsBodyFormatter = require("../../helpers/utilities.js")
 
 
 

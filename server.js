@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
 const app = express();
 
 // parse requests of content-type - application/json
@@ -24,3 +23,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+const { CallAutoInsertMealCount } = require("./app/services/autoInsertMealDate.service.js");
+CallAutoInsertMealCount().start()
