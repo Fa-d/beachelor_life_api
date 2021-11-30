@@ -58,7 +58,7 @@ exports.UPDATEUserWiseMealCount = (req, res)=>{
     const UserModel = {
         isDinner: req.body.isDinner,
         count: req.body.count,
-        userID: req.body.userId,
+        userId: req.body.userId,
         date: req.body.date
     }
     
@@ -73,16 +73,5 @@ exports.UPDATEUserWiseMealCount = (req, res)=>{
         } else res.send(data);
     });
 };
-exports.INSERTUserWiseMealCount = (req, res)=>{
-    if (!req.body) {
-        req.status(400).send({
-            message: "Failed",
-            didError: true,
-            errorMessage: "Failed to validate request body",
-            model: []
-        });
-    }
-};
-
 
 

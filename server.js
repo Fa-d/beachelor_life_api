@@ -14,7 +14,6 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/login_signup/login.routes.js")(app);
-require("./app/routes/mealCount/mealCount.routes.js")(app);
 require("./app/routes/mealCount/mealCountDetails.routes.js")(app);
 require("./app/routes/bazar/bazar.routes.js")(app);
 

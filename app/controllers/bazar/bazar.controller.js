@@ -23,6 +23,32 @@ exports.GETAllBazar = (req, res) => {
     });
 };
 
+exports.INSERTBazarCostUserWise= (req, res) => {
+    if (!req.body) {
+        return req.status(400).send({
+            message: "Failed",
+            didError: true,
+            errorMessage: "Failed to validate request body",
+            model: []
+        });
+    }
+    const bazarModel = {
+        userId: req.body.userId,
+        cost: req.body.cost,
+        date: req.body.date
+    };
+    BazarModel.InsertBazarCostUserWiseFunc(bazarModel, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Failed",
+                didError: true,
+                errorMessage: "Some error occured during login progress",
+                model: []
+            })
+        } else res.send(data);
+    });
+}
+
 
 exports.UPDATESpecificUserBazarCost = (req, res) => {
     if (!req.body) {
