@@ -5,7 +5,7 @@ const responsBodyFormatter = require("../../helpers/utilities.js")
 class LogInRegister {
     constructor() { }
     static Login(loginModel, result) {
-        sql.query(`select count(userId) from user where (userMobile = "${loginModel.user_name}" OR userEmail = "${loginModel.user_name}) AND userPassword = "${loginModel.password}"`, (err, res) => {
+        sql.query(`select count(userId) from user where (userMobile = "${loginModel.user_name}" OR userEmail = "${loginModel.user_name}") AND userPassword = "${loginModel.password}"`, (err, res) => {
             if (err) {
                 result(err, null);
                 return;
