@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Bachelors Meal application." });
 });
 
-require("./app/routes/login_signup/login.routes.js")(app);
+require("./app/routes/login_signup/loginSignUp.routes.js")(app);
 require("./app/routes/mealCount/mealCountDetails.routes.js")(app);
 require("./app/routes/bazar/bazar.routes.js")(app);
 

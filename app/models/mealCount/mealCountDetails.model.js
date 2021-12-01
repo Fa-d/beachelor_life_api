@@ -4,7 +4,7 @@ const responsBodyFormatter = require("../../helpers/utilities.js")
 class MealCountDetailsModel {
     constructor() { }
     static getAllUsersMealCount(result) {
-        sql.query(`select * from meal;`, (err, res) => {
+        sql.query(`SELECT user.userId, userName,lunchCount,dinnerCount, dateOfThatDay FROM meal left join user on user.userId = meal.userId`, (err, res) => {
             if (err) { result(err, null); return; }
             const data = responsBodyFormatter(res, err);
             result(null, data);

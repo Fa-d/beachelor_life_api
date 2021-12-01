@@ -15,14 +15,15 @@ class LogInRegister {
         });
     }
     static Registration(registrationModel, result) {
-        sql.query(`insert into users (user_name,mobile ,email,password) values ("${registrationModel.user_name}", "${registrationModel.mobile}", "${registrationModel.email}", "${registrationModel.password}")`,(err, res) => {
-                if (err) {
-                    result(err, null);
-                    return;
-                }
-                const data = responsBodyFormatter(res, err);
-                result(null, data);
-            });
+        sql.query(`insert INTO user(userName, userMobile, userEmail, userPassword) values ("${registrationModel.user_name}", "${registrationModel.mobile}", "${registrationModel.email}", "${registrationModel.password}");
+        SELECT LAST_INSERT_ID() as userId;`, (err, res) => {
+            if (err) {
+                result(err, null);
+                return;
+            }
+            const data = responsBodyFormatter(res, err);
+            result(null, data);
+        });
     }
     static CheckIfUserAlreadyExists(registrationMode, result) {
         sql.query(`SELECT * FROM users where email = "${registrationMode.email}"`, (err, res) => {
@@ -35,4 +36,7 @@ class LogInRegister {
         });
     }
 }
+
 module.exports = LogInRegister;
+
+

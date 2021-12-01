@@ -1,4 +1,4 @@
-const LogInRegister = require("../../models/login_signup/login.model.js");
+const LogInRegister = require("../../models/login_signup/loginSignUp.model.js");
 
 
 exports.loginCheck = (req, res) => {
@@ -75,3 +75,6 @@ exports.registerUser = (req, res) => {
         }
     });
 }
+
+
+
