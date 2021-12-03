@@ -34,6 +34,14 @@ class MealCountDetailsModel {
         }
     }
 
+    static getAllUsersTotalMealCountFunc(result) {
+        sql.query(`SELECT sum(dinnerCount) + sum (lunchCount) as totalMeal from meal`, (err, res) => {
+            if (err) { result(err, null); return; }
+            const data = responsBodyFormatter(res, err);
+            result(null, data);
+        });
+    }
+
 }
 
 module.exports = MealCountDetailsModel
