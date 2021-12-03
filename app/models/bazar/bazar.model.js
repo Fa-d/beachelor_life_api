@@ -35,7 +35,7 @@ class BazarModel {
         });
     }
     static GETSpecificUsersBazarCostSumFunc(bazarCostModel, result) {
-        sql.query(`select  userName, sum(bazarCost) as totalCost from user join bazar on bazar.userId = user.userId where user.userId = ${bazarCostModel.userId} ;`, (err, res) => {
+        sql.query(`select  user.userId, userName, sum(bazarCost) as totalCost from user join bazar on bazar.userId = user.userId where user.userId = ${bazarCostModel.userId} ;`, (err, res) => {
             if (err) { result(err, null); return; }
             const data = responsBodyFormatter(res, err);
             result(null, data);
