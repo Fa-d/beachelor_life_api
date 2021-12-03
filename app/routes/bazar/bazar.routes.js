@@ -1,7 +1,12 @@
 module.exports = app => {
-    const { GETAllBazar, UPDATESpecificUserBazarCost, GETSpecificUserBazarCost, INSERTBazarCostUserWise } = require("../../controllers/bazar/bazar.controller.js");
+    const { GETAllBazar, UPDATESpecificUserBazarCost, GETSpecificUserBazarCost, INSERTBazarCostUserWise, GETSpecificUsersBazarCostSum,
+        GETIndividualUsersTotalBazarCost, GETAllUsersTotalBazarCostAndCount
+    } = require("../../controllers/bazar/bazar.controller.js");
     app.get("/getAllBazarCostForAllUsers", GETAllBazar);
     app.post("/updateBazarOfSpecificUser", UPDATESpecificUserBazarCost);
     app.post("/getSpecificUserBazarCost", GETSpecificUserBazarCost);
     app.post("/insertBazarUserWise", INSERTBazarCostUserWise);
+    app.post("/getSpecificUsersTotalBazarCost", GETSpecificUsersBazarCostSum);
+    app.get("/getIndividualUsersTotalBazarCost", GETIndividualUsersTotalBazarCost);
+    app.get("/getAllUsersTotalBazarCostAndCount", GETAllUsersTotalBazarCostAndCount);
 };

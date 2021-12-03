@@ -6,7 +6,7 @@ const responsBodyFormatter = require("../../helpers/utilities.js")
 class BazarModel {
     constructor() { }
     static BazarGetAllFunc(result) {
-        sql.query(`select * from bazar; `, (err, res) => {
+        sql.query(`select user.userId, userName, bazarCost, dateOfThatDay from user join bazar on bazar.userId = user.userId`, (err, res) => {
             if (err) { result(err, null); return; }
             const data = responsBodyFormatter(res, err);
             result(null, data);
@@ -21,7 +21,7 @@ class BazarModel {
         });
     }
     static GetBazarCostUserWiseFunc(bazarCostModel, result) {
-        sql.query(`select * from bazar where userid ='${bazarCostModel.userId}';`, (err, res) => {
+        sql.query(`select user.userId, userName, bazarCost, dateOfThatDay from user join bazar on bazar.userId = user.userId where user.userId = ${bazarCostModel.userId};`, (err, res) => {
             if (err) { result(err, null); return; }
             const data = responsBodyFormatter(res, err);
             result(null, data);
@@ -29,6 +29,27 @@ class BazarModel {
     }
     static InsertBazarCostUserWiseFunc(bazarCostModel, result) {
         sql.query(`insert into bazar(userId, bazarCost, dateOfThatDay) VALUES (${bazarCostModel.userId},${bazarCostModel.cost}, "${bazarCostModel.date}") ;`, (err, res) => {
+            if (err) { result(err, null); return; }
+            const data = responsBodyFormatter(res, err);
+            result(null, data);
+        });
+    }
+    static GETSpecificUsersBazarCostSumFunc(bazarCostModel, result) {
+        sql.query(`select  userName, sum(bazarCost) as totalCost from user join bazar on bazar.userId = user.userId where user.userId = ${bazarCostModel.userId} ;`, (err, res) => {
+            if (err) { result(err, null); return; }
+            const data = responsBodyFormatter(res, err);
+            result(null, data);
+        });
+    }
+    static GETIndividualUsersTotalBazarCostFunc(result) {
+        sql.query(`select user.userId, userName, sum(bazarCost) as totalCost, count(bazar.userId) as bazarCount from bazar join user on bazar.userId = user.userId  group by user.userId`, (err, res) => {
+            if (err) { result(err, null); return; }
+            const data = responsBodyFormatter(res, err);
+            result(null, data);
+        });
+    }
+    static GETAllUsersTotalBazarCostAndCountFunc(result) {
+        sql.query(`select sum(bazarCost) as totalCost, count(bazar.userId) as bazarCount from bazar join user on bazar.userId = user.userId;`, (err, res) => {
             if (err) { result(err, null); return; }
             const data = responsBodyFormatter(res, err);
             result(null, data);
