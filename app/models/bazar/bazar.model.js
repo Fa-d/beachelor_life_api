@@ -14,7 +14,7 @@ class BazarModel {
     }
 
     static UpdateBazarCostUserWiseFunc(bazarCostModel, result) {
-        sql.query(`update bazar set bazarCost = ${bazarCostModel.bazarCost} where userId  = ${bazarCostModel.userId} AND dateOfThatDay = "${bazarCostModel.dateOfMeal}";`, (err, res) => {
+        sql.query(`update bazar set bazarCost = ${bazarCostModel.bazarCost} , userId = ${bazarCostModel.userId} where dateOfThatDay = "${bazarCostModel.dateOfMeal}";`, (err, res) => {
             if (err) { result(err, null); return; }
             const data = responsBodyFormatter(res, err);
             result(null, data);
@@ -54,6 +54,25 @@ class BazarModel {
             const data = responsBodyFormatter(res, err);
             result(null, data);
         });
+    }
+    static bazarDateInitializeFunc(result) {
+        sql.getConnection(function (err, connection) {
+            if (err) { return cb(err); }
+            //loop through all day of the month
+            var fromDate = new Date("03-Dec-2021");
+            var toDate = new Date("02-Jan-2022");
+            for (var day = fromDate; day <= toDate; day.setDate(day.getDate() + 1)) {
+                connection.query(`INSERT INTO bazar (dateOfThatDay) VALUES("${day.toISOString().slice(0, 19).replace('T', ' ')}");`, (err, res) => {
+                    if (err) { result(err, null); connection.release(); return; }
+                });
+            }
+            connection.query(`SELECT * FROM bazar`, (err, res) => {
+                if (err) { result(err, null); connection.release(); return; }
+                connection.release();
+                const data = responsBodyFormatter(res, err);
+                result(null, data);
+            });
+        })
     }
 }
 

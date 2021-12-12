@@ -73,7 +73,6 @@ exports.UPDATEUserWiseMealCount = (req, res)=>{
         } else res.send(data);
     });
 };
-
 exports.getAllUsersTotalMealCount = (req, res)=>{
     if (!req.body) {
         req.status(400).send({
@@ -95,5 +94,24 @@ exports.getAllUsersTotalMealCount = (req, res)=>{
         } else res.send(data);
     });
 };
-
-
+exports.gettest1 = (req, res)=>{
+    if (!req.body) {
+        req.status(400).send({
+            message: "Failed",
+            didError: true,
+            errorMessage: "Failed to validate request body",
+            model: []
+        });
+    }
+    
+    MealCountDetailsModel.gettestFunc1((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Failed",
+                didError: true,
+                errorMessage: "Some internal error occured",
+                model: [err]
+            })
+        } else res.send(data);
+    });
+};
