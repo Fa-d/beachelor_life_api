@@ -6,7 +6,7 @@ let datetimeFormat = moment().format('YYYY-MM-DD HH:mm:ss');
 class MealCountDetailsModel {
     constructor() { }
     static getAllUsersMealCount(result) {
-        sql.query(`SELECT user.userId, userName,lunchCount,dinnerCount, dateOfThatDay FROM meal left join user on user.userId = meal.userId`, (err, res) => {
+        sql.query(`SELECT user.userId, userName,lunchCount,dinnerCount, dateOfThatDay, isUpdatedToday FROM meal left join user on user.userId = meal.userId`, (err, res) => {
             if (err) { result(err, null); return; }
             const data = responsBodyFormatter(res, err);
             result(null, data);
@@ -62,7 +62,7 @@ class MealCountDetailsModel {
                         connection.query(queriesList.q4, (err, res) => {
                             //loop through all day of the month
                             var fromDate = new Date("02-Dec-2021");
-                            var toDate = new Date("02-Jan-2022");
+                            var toDate = new Date("01-Jan-2022");
                             for (var day = fromDate; day <= toDate; day.setDate(day.getDate() + 1)) {
                                 //loop through all users
                                 for (let userNo = 0; userNo < res.length; userNo++) {
