@@ -22,13 +22,13 @@ class MealCountDetailsModel {
 
     static updateUserWiseMealCount(UserModel, result) {
         if (UserModel.isDinner) {
-            sql.query(`update meal set dinnerCount = ${UserModel.count} where userId = ${UserModel.userId} AND dateOfThatDay = "${UserModel.date}";`, (err, res) => {
+            sql.query(`update meal set dinnerCount = ${UserModel.count}, isUpdatedToday = true where userId = ${UserModel.userId} AND dateOfThatDay = "${UserModel.date}";`, (err, res) => {
                 if (err) { result(err, null); return; }
                 const data = responsBodyFormatter(res, err);
                 result(null, data);
             });
         } else {
-            sql.query(`update meal set lunchCount = ${UserModel.count} where userId = ${UserModel.userId} AND dateOfThatDay = "${UserModel.date}";`, (err, res) => {
+            sql.query(`update meal set lunchCount = ${UserModel.count}, isUpdatedToday = true where userId = ${UserModel.userId} AND dateOfThatDay = "${UserModel.date}";`, (err, res) => {
                 if (err) { result(err, null); return; }
                 const data = responsBodyFormatter(res, err);
                 result(null, data);
